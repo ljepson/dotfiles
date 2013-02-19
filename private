@@ -1,0 +1,20 @@
+# Important
+echo -ne "\e]1;b-m-`whoami`\a";
+cd /var/www;
+
+SCREEN_TEST="/tmp/$USER-screen"
+if test $SSH_AUTH_SOCK && [ $SSH_AUTH_SOCK != $SCREEN_TEST ]
+then
+    unlink /tmp/$USER-screen
+    ln -sf $SSH_AUTH_SOCK $SCREEN_TEST
+    export SSH_AUTH_SOCK=$SCREEN_TEST
+    if [[ $STY = '' ]]; then
+        screen -DR `whoami`;
+    fi;
+fi
+clear;
+
+# Functions
+
+# Aliases
+alias cdd='cd /var/www'
